@@ -77,12 +77,12 @@ Detailed documentations about the project:
 **********************
 
 ## Contributors
-|  **Contributor**    | 🔗 **GitHub Profile**                           |
-|-----------------------|-----------------------------------------------|
+|  **Contributor**     | 🔗 **GitHub Profile**                          |
+|----------------------|------------------------------------------------|
 | 🧑‍💻 Nguyen Anh Khoa   | [RestingWiki](https://github.com/RestingWiki)  |
 | 🧑‍💻 Nguyen Duc Nguyen | [nguyen875](https://github.com/nguyen875)      |
 | 🧑‍💻 Ngo Bao Ngoc      | [Hayzen2](https://github.com/Hayzen2)          |
 | 🧑‍💻 Ngo Hao Hong Du   | [DaauShen](https://github.com/DaauShen)        |
-
+| 🧑‍💻 Nguyen Anh Kiet   | [kiet-na](https://github.com/kiet-na)          |
 
 

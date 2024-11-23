@@ -1,0 +1,176 @@
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+  background: linear-gradient(45deg, #4b6cb7, #182848);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.navbar-brand .Logo {
+  object-fit: contain;
+}
+.logo img {
+  width: 100px;
+  height: 80px;
+  object-fit: contain;
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+.welcome-text {
+  color: #fff;
+  margin-right: 15px;
+}
+
+.btn-outline-light {
+  border-radius: 20px;
+}
+
+h1 {
+  color: #4b6cb7;
+  font-weight: 900;
+}
+h3 {
+  color: #4b6cb7;
+  font-weight: 700;
+}
+.nav-tabs .nav-link {
+  color: #4b6cb7;
+  font-weight: 600;
+  border-radius: 10px 10px 0 0;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #4b6cb7;
+  color: #fff;
+}
+
+/* .card {
+  border-radius: 15px;
+  width: 400px; 
+  height: 500px; 
+  padding: 30px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  background: white;
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between; 
+} */
+
+.table-hover tbody tr:hover {
+  background-color: #f5f1f1;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: #4d71d5;
+}
+
+.table-primary {
+  background-color: #e3f2fd;
+}
+
+input.form-control {
+  border-radius: 20px;
+}
+
+.btn-primary {
+  background-color: #4e54c8;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #8f94fb;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  margin-top: 50px;
+  color: #6c757d;
+}
+
+.status-box {
+  padding: 5px 12px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.status-enabled {
+  background-color: #4caf50;
+}
+
+.status-disabled {
+  background-color: #f44336;
+}
+
+.hero {
+  background-image: url('https://image.tienphong.vn/w1000/Uploaded/2024/xqeioxnexq/2022_09_15/267414746-662651741765273-5724882972541705666-n-6007.jpg'); /* Replace with your own image */
+  background-size: cover;
+  background-position: center;
+  height: 89.6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.hero-content {
+  position: relative;
+  color: white;
+  text-align: center;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin: 20px;
+}
+
+.cta-button {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cta-button:hover {
+  background-color: #5a6268;
+}
+
+.login-button:hover {
+  background-color: #3b3dbf;
+}
+
+.btn-success:hover {
+  background-color: #257447;
+}
+
+.login-button {
+  width: 100%;
+  border-radius: 25px;
+  font-size: 1.1rem;
+}

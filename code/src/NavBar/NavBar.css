@@ -1,0 +1,22 @@
+.navbar {
+    background: linear-gradient(45deg, #4b6cb7, #182848);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-brand:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Slight darkening effect */
+  color: #e0e0e0; /* Optional: Change the text color on hover */
+  border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+.navbar-brand .Logo {
+    object-fit: contain;
+}
+.btn-outline-light {
+    border-radius: 20px !important; /* The important part is to override bootstrap default*/
+  }

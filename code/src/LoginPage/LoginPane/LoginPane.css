@@ -1,0 +1,28 @@
+.pane {
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2); 
+}
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.login-card {
+    border-radius: 15px;
+    width: 400px !important; /* Narrow width for vertical appearance */
+    height: 500px; /* Increased height */
+    padding: 30px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    background: white;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Add spacing between sections */
+}
+
+.card .logo img {
+    width: 150px;
+    margin-bottom: 15px;
+}

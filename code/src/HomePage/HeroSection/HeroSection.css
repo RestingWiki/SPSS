@@ -1,0 +1,54 @@
+    .hero {
+        background-image: url('https://image.tienphong.vn/w1000/Uploaded/2024/xqeioxnexq/2022_09_15/267414746-662651741765273-5724882972541705666-n-6007.jpg'); /* Replace with your own image */
+        background-size: cover;
+        background-position: center;
+        height: 89.6vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .hero-content {
+        position: relative;
+        color: white;
+        text-align: center;
+        text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+
+    .hero-content p {
+        font-size: 1.5rem;
+        margin: 20px;
+    }
+    .cta-button {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .cta-button:hover {
+    background-color: #5a6268;
+    }
+
+    .login-button:hover {
+    background-color: #3b3dbf;
+    }
+
+    .btn-success:hover {
+    background-color: #257447;
+    }

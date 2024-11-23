@@ -92,6 +92,7 @@ Detailed documentations about the project:
      ```
 
    #### Step 3: Run the Development Server
+   - Start the `vite` development server:
      ```bash
      npm run dev
      ```

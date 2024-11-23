@@ -12,6 +12,9 @@
   - [Getting Started](#getting-started)
   - [Documentation](#documentation)
   - [Contribution](#contribution)
+      - [Step 1: Environment](#step-1-environment)
+      - [Step 2: Install Dependencies](#step-2-install-dependencies)
+      - [Step 3: Run the Development Server](#step-3-run-the-development-server)
   - [Contributors](#contributors)
 
 **********************
@@ -72,7 +75,27 @@ Detailed documentations about the project:
    - `feat: add buy paper`
    - `fix: resolve login crash issue`
    - `docs: update modelling description`
+3. **Web Development**:
+   #### Step 1: Environment
+   - Ensure you have  installed
+     - [Node.js](https://nodejs.org/)
+     - npm (comes with Node.js)
 
+   #### Step 2: Install Dependencies
+   - Navigate to the project directory:
+     ```bash
+     cd code
+     ```
+   - Install the required dependencies:
+     ```bash
+     npm install
+     ```
+
+   #### Step 3: Run the Development Server
+   - Start the `vite` development server:
+     ```bash
+     npm run dev
+     ```
 
 **********************
 

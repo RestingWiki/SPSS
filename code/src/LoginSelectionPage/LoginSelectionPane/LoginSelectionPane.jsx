@@ -20,7 +20,7 @@ function LoginSelectionPane() {
                         </button>
                     </Link>
 
-                    <Link to='/LoginPage'>
+                    <Link to='/StudentLoginPage'>
                         <button type="button" className="btn btn-primary login-button my-2">
                             <i className="bi bi-person-fill me-1"></i> Sinh viên
                         </button>

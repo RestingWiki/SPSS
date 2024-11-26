@@ -1,0 +1,16 @@
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.text-danger {
+    color: red;
+}
+
+.text-success {
+    color: green;
+}
+
+

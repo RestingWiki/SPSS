@@ -50,7 +50,7 @@ function StudentBuyPaper(){
                 <p className="text-center mb-4 fs-4 text-muted">
                     Giá: 2.000 VND/trang.
                 </p>
-                <div className="card mx-auto p-4 shadow" style={{ maxWidth: "600px" }}>
+                <div className="mx-auto p-4 shadow card-buy-paper" style={{ maxWidth: "600px" }}>
                     <div className="mb-3 text-center fs-5">
                         <strong>Số trang hiện tại:</strong>{" "}
                         <span className={`fs-4 fw-bold ${currentBalance > 0 ? "text-success" : "text-danger"}`}>

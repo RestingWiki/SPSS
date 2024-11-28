@@ -30,7 +30,7 @@ const SPSONavBar = () => {
                         <Link to='/SPSOHomePage' class="nav-link text-white"><i class="bi bi-house-door me-2"></i>Trang chủ</Link>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="nav-link text-white" href="#"><i class="bi bi-grid me-2"></i>Bảng điều khiển</a>
+                        <Link to='/SPSOHomePage/SPSODashboard' class="nav-link text-white"><i class="bi bi-grid me-2"></i>Bảng điều khiển</Link>
                     </li>
                     <li class="nav-item mx-1">
                         <Link to='/SPSOHomePage/SPSOLogs' class="nav-link text-white"><i class="bi bi-clock me-2"></i>Lịch sử in</Link>

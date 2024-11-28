@@ -8,7 +8,7 @@ import SPSOHomePage from './SPSOHomePage/SPSOHoMEPage.jsx'
 import SPSOSystemConfig from './SPSOHomePage/SPSOSystemConfig/SPSOSystemConfig.jsx'
 import SPSOPrinterManagement from './SPSOHomePage/SPSOPrinterManagement/SPSOPrinterManagement.jsx'
 import SPSOLogs from './SPSOHomePage/SPSOLogs/SPSOLogs.jsx'
-
+import SPSODashboard from './SPSOHomePage/SPSODashboard/SPSODashboard.jsx'
 
 import StudentLoginPage from './StudentLoginPage/StudentLoginPage.jsx'
 import StudentHomePage from './StudentHomePage/StudentHomePage.jsx'
@@ -55,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: '/SPSOHomePage/SPSOLogs',
     element: <SPSOLogs/>,
+  },
+  {
+    path: '/SPSOHomePage/SPSODashboard',
+    element: <SPSODashboard/>,
   },
   // Adding student pages
   // Explicitly named student paths

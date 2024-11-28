@@ -1,0 +1,65 @@
+body {
+    background-color: #f8fafc; 
+    color: #343a40; 
+}
+
+.card{
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #dee2e6; 
+    background: linear-gradient(to top, #f9fbfc, #ffffff); 
+}
+
+.stats-card .number {
+    font-size: 30px;
+    font-weight: bold;
+    color: #495057; 
+}
+
+.stats-card .text {
+    font-size: 16px;
+    color: #6c757d; 
+}
+
+.stats-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.form-select-dashboard {
+    width: auto;
+    border: 2px solid #17a2b8; 
+    border-radius: 5px;
+}
+
+.form-select-dashboard:hover {
+    border-color: #0056b3;
+}
+
+.form-label-dashboard {
+    font-weight: bold;
+}
+
+#revenueChart {
+    width: 70% !important; 
+    height: 70% !important; 
+}
+
+.badge-dashboard {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}

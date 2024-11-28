@@ -9,8 +9,14 @@ import TogglePrinter from "./TogglePrinter";
 
 function SPSOPrinterManagement(){
     const [physicalPrinters, setPhysicalPrinters] = useState([
-        { id: 1, model: "HP LaserJet 1020", location: "B3" },
-        { id: 2, model: "Epson EcoTank L3110", location: "A5" },
+        { id: 1, model: "Epson EcoTank L3110", location: "A5" },
+        { id: 2, model: "Canon PIXMA TR8520", location: "A5" },
+        { id: 3, model: "HP LaserJet 1020", location: "B2" },
+        { id: 4, model: "HP Envy 5055", location: "B2" },
+        { id: 3, model: "Lexmark MS431DN", location: "B10" },
+        { id: 4, model: "Lexmark MS431DN", location: "B10" },
+        { id: 5, model: "Epson EcoTank L3110", location: "C4" },
+        { id: 6, model: "Brother MFC-L2750DW", location: "C4" },
       ]);
       const [connectedPrinters, setConnectedPrinters] = useState([]);
     

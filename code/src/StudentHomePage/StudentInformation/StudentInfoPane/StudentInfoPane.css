@@ -1,0 +1,72 @@
+
+h1 {
+    color: #4b6cb7 !important;
+    font-weight: 700 !important;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid  #4b6cb7;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
+    border-color: #3f51b5;
+}
+
+.btn-primary, .btn-outline-primary {
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover, .btn-outline-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-outline-primary {
+    border: 2px solid #007bff;
+    color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.section-title {
+    color: #3f51b5; 
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+body {
+    color: #333;
+}
+
+.table-striped tbody tr:hover,
+.table-striped tbody tr:hover td {
+    background-color: #d6e3f1 !important;
+}
+
+.table thead th {
+    background-color: #283593; 
+    color: #fff;
+    border-color: #3f51b5;
+    text-align: center;
+}
+
+.table tbody td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-striped tbody tr td, .table-striped tbody tr th {
+    border: 1px solid #ddd;
+}
+

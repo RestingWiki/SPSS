@@ -1,17 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Metadata from '../../Metadata/Metada';
 import StudentNavBar from '../StudentNavBar/StudentNavBar';
-import StudentHero from '../StudentHero/StudentHero';
+import StudentInfoPane from './StudentInfoPane/StudentInfoPane';
 
-function StudentInformation(){
-    return(
+function StudentInformation() {
+    return (
         <>
-            <Metadata/>
-            <StudentNavBar/>
-            <h1>TODO</h1>
+            <Metadata />
+            <StudentNavBar />
+            <StudentInfoPane />
         </>
-    )
+    );
 }
 
-export default StudentInformation
+export default StudentInformation;

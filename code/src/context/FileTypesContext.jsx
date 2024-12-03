@@ -7,7 +7,7 @@ export const FileTypeProvider = ({ children }) => {
   const [fileTypes, setFileTypes] = useState([
     'pdf',
     'doc',
-    'docx'
+    'docx',
   ]);
 
   return (

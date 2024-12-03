@@ -1,30 +1,44 @@
 import React, { useState } from 'react';
+import { useUploadedFiles } from '../../context/UploadedFileContext'; // Import context
+import './StudentPrintDocument.css';
 
 const FileSelector = () => {
-    const [selectedFile, setSelectedFile] = useState(null);
+  const { uploadedFiles } = useUploadedFiles(); // Access uploaded files from context
+  const [selectedFile, setSelectedFile] = useState(null);
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setSelectedFile(file.name);
-        }
-    };
+  const handleSelection = (event) => {
+    const selectedIndex = event.target.value;
+    if (selectedIndex !== '') {
+      setSelectedFile(uploadedFiles[selectedIndex]);
+    } else {
+      setSelectedFile(null);
+    }
+  };
 
-    return (
-        <div className="file-selector">
-            <label htmlFor="file-input" className="file-label">
-                Choose File
-            </label>
-            <input 
-                type="file" 
-                id="file-input" 
-                className="file-input" 
-                onChange={handleFileChange} 
-                style={{ display: 'none' }}
-            />
-            {selectedFile && <span className="file-name">{selectedFile}</span>}
+  return (
+    <div className="file-selector">
+      <div className="dropdown-row">
+        <select 
+          id="file-select" 
+          className="file-dropdown" 
+          onChange={handleSelection} 
+          value={selectedFile ? uploadedFiles.indexOf(selectedFile) : ''}
+        >
+          <option value="">-- Select a file --</option>
+          {uploadedFiles.map((file, index) => (
+            <option key={index} value={index}>
+              {file.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      {selectedFile && (
+        <div className="file-info-row mt-2">
+          <strong>Selected File:</strong> {selectedFile.name} ({(selectedFile.size / 1024).toFixed(2)} KB)
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default FileSelector;

@@ -3,15 +3,18 @@ import axios from 'axios';
 import Metadata from '../../Metadata/Metada'; // Corrected import path
 import StudentNavBar from '../StudentNavBar/StudentNavBar';
 import { formatFileSize } from '../../formatFileSize'; // Import the utility function
-import { useFileTypes } from '../../context/FileTypesContext'; // Import context
+import { useFileTypes } from '../../context/FileTypesContext'; // Import context for file types
+import { useUploadedFiles } from '../../context/UploadedFileContext'; // Import context for uploaded files
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is installed
 
 function StudentUploadDocuments() {
   // Access file types from the context
   const { fileTypes } = useFileTypes();
 
+  // Access uploaded files context
+  const { uploadedFiles, addUploadedFile, removeUploadedFile, clearUploadedFiles } = useUploadedFiles();
+
   // State variables for form inputs
-  const [files, setFiles] = useState([]);
   const [copies, setCopies] = useState(1);
   const [color, setColor] = useState(true);
   const [doubleSided, setDoubleSided] = useState(false);
@@ -35,14 +38,14 @@ function StudentUploadDocuments() {
     let errorMessages = [];
 
     // Calculate total number of files
-    const totalFiles = files.length + selectedFiles.length;
+    const totalFiles = uploadedFiles.length + selectedFiles.length;
     if (totalFiles > maxFiles) {
-      setMessage(`You can upload a maximum of ${maxFiles} files. You have already selected ${files.length} file(s).`);
+      setMessage(`You can upload a maximum of ${maxFiles} files. You have already selected ${uploadedFiles.length} file(s).`);
       return;
     }
 
     // Calculate current total size
-    const currentTotalSize = files.reduce((acc, file) => acc + file.size, 0);
+    const currentTotalSize = uploadedFiles.reduce((acc, file) => acc + file.size, 0);
     const newFilesTotalSize = selectedFiles.reduce((acc, file) => acc + file.size, 0);
     const updatedTotalSize = currentTotalSize + newFilesTotalSize;
 
@@ -59,7 +62,7 @@ function StudentUploadDocuments() {
         errorMessages.push(`Unsupported file extension: ${file.name}`);
       } else {
         // Prevent duplicate files
-        const isDuplicate = files.some((existingFile) => existingFile.name === file.name && existingFile.size === file.size);
+        const isDuplicate = uploadedFiles.some((existingFile) => existingFile.name === file.name && existingFile.size === file.size);
         if (!isDuplicate) {
           validatedFiles.push(file);
         } else {
@@ -72,20 +75,10 @@ function StudentUploadDocuments() {
       setMessage(errorMessages.join(' | '));
     } else if (validatedFiles.length > 0) {
       setMessage('Files added successfully and ready to upload.');
+      validatedFiles.forEach((file) => addUploadedFile(file)); // Add validated files to context
     } else {
       setMessage('No new valid files selected.');
     }
-
-    // Append validated files to existing files
-    setFiles((prevFiles) => [...prevFiles, ...validatedFiles]);
-  };
-
-  // Remove file from the list
-  const removeFile = (index) => {
-    const newFiles = [...files];
-    newFiles.splice(index, 1);
-    setFiles(newFiles);
-    setMessage('File removed.');
   };
 
   // Handle form submission
@@ -95,7 +88,7 @@ function StudentUploadDocuments() {
     // Clear previous messages
     setMessage('');
 
-    if (files.length === 0) {
+    if (uploadedFiles.length === 0) {
       setMessage('Please select at least one file to upload.');
       return;
     }
@@ -107,7 +100,7 @@ function StudentUploadDocuments() {
     formData.append('doubleSided', doubleSided);
 
     // Append files with 'files[]' to indicate an array
-    files.forEach((file) => {
+    uploadedFiles.forEach((file) => {
       formData.append('files[]', file);
     });
 
@@ -129,7 +122,7 @@ function StudentUploadDocuments() {
       if (response.status === 200) {
         setMessage('Print request submitted successfully!');
         // Reset form fields
-        setFiles([]);
+        clearUploadedFiles();
         setCopies(1);
         setColor(true);
         setDoubleSided(false);
@@ -189,7 +182,7 @@ function StudentUploadDocuments() {
               accept={fileTypes.map((type) => `.${type}`).join(',')} // Dynamically set accept attribute
               onChange={handleFileChange}
               required
-              disabled={isSubmitting || files.length >= maxFiles}
+              disabled={isSubmitting || uploadedFiles.length >= maxFiles}
             />
             <div className="form-text">
               Allowed formats: {fileTypes.join(', ')} | Max total size: 100MB | Max files: {maxFiles}
@@ -197,11 +190,11 @@ function StudentUploadDocuments() {
           </div>
 
           {/* Preview Selected Files */}
-          {files.length > 0 && (
+          {uploadedFiles.length > 0 && (
             <div className="mb-3">
               <label className="form-label">Selected Files:</label>
               <ul className="list-group">
-                {files.map((file, index) => (
+                {uploadedFiles.map((file, index) => (
                   <li
                     key={index}
                     className="list-group-item d-flex justify-content-between align-items-center"
@@ -212,7 +205,7 @@ function StudentUploadDocuments() {
                     <button
                       type="button"
                       className="btn btn-sm btn-danger"
-                      onClick={() => removeFile(index)}
+                      onClick={() => removeUploadedFile(index)}
                       disabled={isSubmitting}
                     >
                       Remove
@@ -222,7 +215,7 @@ function StudentUploadDocuments() {
               </ul>
               {/* Display Total Upload Size */}
               <div className="mt-2">
-                <strong>Total Size:</strong> {formatFileSize(files.reduce((acc, file) => acc + file.size, 0))}
+                <strong>Total Size:</strong> {formatFileSize(uploadedFiles.reduce((acc, file) => acc + file.size, 0))}
               </div>
             </div>
           )}

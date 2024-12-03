@@ -8,9 +8,32 @@
     margin: 0;
     white-space: nowrap; /* Prevent the text from wrapping */
 }
+
 .file-selector {
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start;
+    width: 100%; /* Ensure it takes full width of the container */
+}
+
+.file-dropdown {
+    width: 100%; /* Ensure the dropdown spans the full width */
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.file-info-row {
+    margin-top: 0.5rem; /* Add spacing above the selected file info */
+    background-color: #f8f9fa; /* Light background for visibility */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    word-wrap: break-word; /* Allow wrapping for long file names */
+    width: 100%; /* Ensure it spans the full width of the container */
+    box-sizing: border-box; /* Include padding and border in width */
 }
 
 .file-label {
@@ -25,7 +48,6 @@
     margin-left: 10px;
     font-style: italic;
 }
-
 
 .counter-section {
     display: flex;
@@ -134,15 +156,11 @@
     display: inline-block; /* Ensure the button is inline for centering */
     width: 100px; /* Fixed width for the button */
     border: 2px  black;    
-
 }
 
 .PrintButton:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
-
-
-
 
 .dropdown-section-container {
     display: flex;
@@ -162,3 +180,65 @@
     font-weight: normal;
 }
 
+
+/* Container for the radio button section */
+.radio-section-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem; /* Space between the radio button sections */
+    margin-top: 2rem; /* Spacing between other sections */
+}
+
+.radio-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-title {
+    margin: 0 0 0.5rem 0;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+/* Individual radio option container */
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between the radio button and label */
+    margin-bottom: 0.5rem; /* Space between options */
+    cursor: pointer; /* Make the entire row clickable */
+}
+
+/* Radio button styles */
+.radio-option input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.radio-option input[type="radio"]:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.radio-option input[type="radio"]:focus {
+    box-shadow: 0 0 3px #007bff;
+}
+
+/* Label styles for radio buttons */
+.radio-option label {
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer; /* Pointer for the label */
+    transition: color 0.3s ease;
+}
+
+.radio-option:hover label {
+    color: #007bff;
+}

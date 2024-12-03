@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Metadata from "../../Metadata/Metada";
 import SPSONavBar from "../SPSONavBar/SPSONavbar";
+import { useFileTypes } from "../../context/FileTypesContext"; // Import the useFileTypes hook
 import './SPSOSystemConfig.css';
 
 function SPSOSystemConfig() {
@@ -9,7 +10,7 @@ function SPSOSystemConfig() {
         return date.toISOString().split("T")[0]; // Get date in YYYY-MM-DD format
     });
 
-    const [fileTypes, setFileTypes] = useState(["doc", "docx", "pdf"]); // Array to store file types
+    const { fileTypes, setFileTypes } = useFileTypes(); // Use the context for file types
     const [newFileType, setNewFileType] = useState(""); // Input value for new file type
 
     // Add new file type

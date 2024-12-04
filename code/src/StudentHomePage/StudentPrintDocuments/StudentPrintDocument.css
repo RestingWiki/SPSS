@@ -242,3 +242,20 @@
 .radio-option:hover label {
     color: #007bff;
 }
+
+.PrintButton {
+    width: 150px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    color: #212529;
+}
+  

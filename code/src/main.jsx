@@ -20,6 +20,8 @@ import StudentViewPrinter from './StudentHomePage/StudentViewPrinter/StudentView
 
 import { FileTypeProvider } from './context/FileTypesContext.jsx'
 import { UploadedFileProvider } from './context/UploadedFileContext.jsx'
+import { PrinterProvider } from './context/PrinterContext.jsx'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './index.css'
@@ -96,10 +98,13 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UploadedFileProvider>
-      <FileTypeProvider> {/* Wrap the context provider here */}
-        <RouterProvider router={router} />
-      </FileTypeProvider>
-    </UploadedFileProvider>
+    <PrinterProvider>
+      <UploadedFileProvider>
+        <FileTypeProvider> {/* Wrap the context provider here */}
+          <RouterProvider router={router} />
+        </FileTypeProvider>
+      </UploadedFileProvider>
+    </PrinterProvider>
+
   </StrictMode>,
 );

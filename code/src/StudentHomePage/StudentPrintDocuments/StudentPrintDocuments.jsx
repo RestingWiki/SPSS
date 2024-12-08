@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useConnectedPrinters } from '../../context/PrinterContext'; // Import the PrinterContext
 import { useUploadedFiles } from '../../context/UploadedFileContext'; // Import the UploadedFileContext
+import { usePaperContext } from '../../context/PaperContext'; // Import the PaperContext
 import Metadata from '../../Metadata/Metada';
 import StudentNavBar from '../StudentNavBar/StudentNavBar';
 import './StudentPrintDocument.css';
 import Counter from './printpagecount';
 
 function StudentPrintDocuments() {
-  const { connectedPrinters } = useConnectedPrinters(); // Use context to access printers
-  const { uploadedFiles } = useUploadedFiles(); // Access uploaded files context
+  const { connectedPrinters } = useConnectedPrinters(); // Access connected printers
+  const { uploadedFiles } = useUploadedFiles(); // Access uploaded files
+  const { paperBalance } = usePaperContext(); // Access current paper balance
   const [selectedPrinter, setSelectedPrinter] = useState(null); // Track selected printer
   const [selectedFile, setSelectedFile] = useState(null); // Track selected file
   const [selectedPaperType, setSelectedPaperType] = useState(''); // Paper size state
@@ -67,6 +69,19 @@ function StudentPrintDocuments() {
             <h1 className="text-center mb-4">
               <i className="bi bi-file-earmark-text me-2"></i>In tài liệu
             </h1>
+              {/* Paper Balance Section */}
+              <div className="header-section mb-4">
+                <h5 className="text-center mb-3">
+                  Số trang giấy còn lại:{" "}
+                  <strong
+                    style={{
+                      color: paperBalance > 0 ? "green" : "red",
+                    }}
+                  >
+                    {paperBalance} trang
+                  </strong>
+                </h5>
+              </div>
             <div className="file-selection-container mb-4">
               <h5 className="mb-3">Select Document:</h5>
               <select

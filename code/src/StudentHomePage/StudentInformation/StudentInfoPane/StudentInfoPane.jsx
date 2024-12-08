@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { usePaperContext } from "../../../context/PaperContext";
-
+import './StudentInfoPane.css';
 function StudentInfoPane() {
   const { paperBalance } = usePaperContext(); // Use the context
 

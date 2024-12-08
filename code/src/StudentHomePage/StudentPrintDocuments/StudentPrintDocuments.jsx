@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useConnectedPrinters } from '../../context/PrinterContext'; // Import the PrinterContext
+import { useUploadedFiles } from '../../context/UploadedFileContext'; // Import the UploadedFileContext
 import Metadata from '../../Metadata/Metada';
 import StudentNavBar from '../StudentNavBar/StudentNavBar';
-import FileSelector from './choosefile';
 import './StudentPrintDocument.css';
 import Counter from './printpagecount';
 
 function StudentPrintDocuments() {
   const { connectedPrinters } = useConnectedPrinters(); // Use context to access printers
+  const { uploadedFiles } = useUploadedFiles(); // Access uploaded files context
   const [selectedPrinter, setSelectedPrinter] = useState(null); // Track selected printer
+  const [selectedFile, setSelectedFile] = useState(null); // Track selected file
   const [selectedPaperType, setSelectedPaperType] = useState(''); // Paper size state
   const [selectedDuplexing, setSelectedDuplexing] = useState(''); // Duplexing state
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission state
@@ -28,9 +30,16 @@ function StudentPrintDocuments() {
     }
   };
 
+  const handleFileSelect = (event) => {
+    const selectedIndex = event.target.value;
+    if (selectedIndex !== '') {
+      setSelectedFile(uploadedFiles[selectedIndex]);
+    }
+  };
+
   const handleSubmit = () => {
-    if (!selectedPrinter || !selectedPaperType || !selectedDuplexing) {
-      setSubmitStatus('Hãy điên thông tin vào đầy đủ ô!');
+    if (!selectedPrinter || !selectedFile || !selectedPaperType || !selectedDuplexing) {
+      setSubmitStatus('Hãy điền đầy đủ thông tin vào các ô!');
       return;
     }
 
@@ -46,7 +55,7 @@ function StudentPrintDocuments() {
 
   // Options for radio buttons
   const paperTypeOptions = ['A4', 'A3'];
-  const duplexingOptions = ['Yes', 'No'];
+  const duplexingOptions = ['Có', 'Không'];
 
   return (
     <>
@@ -56,19 +65,30 @@ function StudentPrintDocuments() {
         <div className="mx-auto p-5 shadow card-print" style={{ maxWidth: '800px' }}>
           <form>
             <h1 className="text-center mb-4">
-              <i className="bi bi-file-earmark-text me-2"></i>Print Document
+              <i className="bi bi-file-earmark-text me-2"></i>In tài liệu
             </h1>
-            <div className="upload-container">
-              <p className="upload-title">Select Document:</p>
-              <FileSelector />
+            <div className="file-selection-container mb-4">
+              <h5 className="mb-3">Select Document:</h5>
+              <select
+                className="form-select"
+                onChange={handleFileSelect}
+                value={selectedFile ? uploadedFiles.indexOf(selectedFile) : ''}
+              >
+                <option value="">-- Select a file --</option>
+                {uploadedFiles.map((file, index) => (
+                  <option key={index} value={index}>
+                    {file.name} ({file.pageCount || 'Unknown'} pages)
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="counter-section">
-              <p className="counter-title">Number of Copies:</p>
+              <p className="counter-title">Số lượng bản sao:</p>
               <Counter />
             </div>
             <div className="radio-section-container">
               <div className="radio-section">
-                <p className="radio-title">Choose Paper Type</p>
+                <p className="radio-title">Chọn kích thước giấy:</p>
                 {paperTypeOptions.map((option, index) => (
                   <div key={index} className="form-check">
                     <input
@@ -87,7 +107,7 @@ function StudentPrintDocuments() {
                 ))}
               </div>
               <div className="radio-section">
-                <p className="radio-title">Choose Duplexing</p>
+                <p className="radio-title">In hai mặt:</p>
                 {duplexingOptions.map((option, index) => (
                   <div key={index} className="form-check">
                     <input
@@ -113,21 +133,11 @@ function StudentPrintDocuments() {
               <table className="table table-hover text-center">
                 <thead className="table-primary">
                   <tr>
-                    <th>
-                      <i className="bi bi-hash me-1"></i> ID Máy in
-                    </th>
-                    <th>
-                      <i className="bi bi-printer me-1"></i> Mô hình
-                    </th>
-                    <th>
-                      <i className="bi bi-geo-alt-fill me-1"></i> Tòa
-                    </th>
-                    <th>
-                      <i className="bi bi-toggle-on me-1"></i> Trạng thái
-                    </th>
-                    <th>
-                      <i className="bi bi-check-circle me-1"></i> Chọn
-                    </th>
+                    <th>ID Máy in</th>
+                    <th>Mô hình</th>
+                    <th>Tòa</th>
+                    <th>Trạng thái</th>
+                    <th>Chọn</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -166,8 +176,7 @@ function StudentPrintDocuments() {
                 </tbody>
               </table>
             </div>
-            <br />
-            <div className="text-center">
+            <div className="text-center mt-4">
               <button
                 type="button"
                 className={`btn ${isSubmitting ? 'btn-warning' : 'btn-primary'} PrintButton`}

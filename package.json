@@ -4,5 +4,8 @@
     "jquery": "^3.7.1",
     "pdfjs-dist": "^4.9.124",
     "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "vite-plugin-dynamic-import-polyfill": "^0.1.0"
   }
 }

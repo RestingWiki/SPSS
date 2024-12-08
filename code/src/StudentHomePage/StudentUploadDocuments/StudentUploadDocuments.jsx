@@ -143,7 +143,7 @@ function StudentUploadDocuments() {
       <Metadata />
       <StudentNavBar />
       <div className="container mt-5">
-        <h2>Upload Documents for Printing</h2>
+        <h2>Xin hãy nhập tài liệu để in</h2>
         {message && (
           <div
             className={`alert ${
@@ -185,7 +185,7 @@ function StudentUploadDocuments() {
               disabled={isSubmitting || uploadedFiles.length >= maxFiles}
             />
             <div className="form-text">
-              Allowed formats: {fileTypes.join(', ')} | Max total size: 100MB | Max files: {maxFiles}
+              File hợp lệ: {fileTypes.join(', ')} | Tổng kích thước tối đa: 100MB | Số lượng tối đa: {maxFiles}
             </div>
           </div>
 
@@ -200,7 +200,7 @@ function StudentUploadDocuments() {
                     className="list-group-item d-flex justify-content-between align-items-center"
                   >
                     <div>
-                      <strong>{file.name}</strong> - {formatFileSize(file.size)}
+                      <strong>{file.name}</strong> - {formatFileSize(file.size)} - {file.pageCount} pages
                     </div>
                     <button
                       type="button"

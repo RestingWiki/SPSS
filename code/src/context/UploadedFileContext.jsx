@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 // Create the Context
 const UploadedFileContext = createContext();
@@ -7,9 +7,21 @@ const UploadedFileContext = createContext();
 export const UploadedFileProvider = ({ children }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
-  // Add a new file to the uploadedFiles list
+  // Helper function to generate a random constant number between 23 and 45
+  const getRandomPageCount = () => Math.floor(Math.random() * (45 - 23 + 1)) + 23;
+
+  // Add a new file to the uploadedFiles list and assign a random page count
   const addUploadedFile = (file) => {
-    setUploadedFiles((prevFiles) => [...prevFiles, file]);
+    const randomPageCount = getRandomPageCount();
+
+    const newFile = {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      pageCount: randomPageCount, // Assign random page count
+    };
+
+    setUploadedFiles((prevFiles) => [...prevFiles, newFile]);
   };
 
   // Remove a file from the uploadedFiles list
@@ -23,7 +35,9 @@ export const UploadedFileProvider = ({ children }) => {
   };
 
   return (
-    <UploadedFileContext.Provider value={{ uploadedFiles, addUploadedFile, removeUploadedFile, clearUploadedFiles }}>
+    <UploadedFileContext.Provider
+      value={{ uploadedFiles, addUploadedFile, removeUploadedFile, clearUploadedFiles }}
+    >
       {children}
     </UploadedFileContext.Provider>
   );

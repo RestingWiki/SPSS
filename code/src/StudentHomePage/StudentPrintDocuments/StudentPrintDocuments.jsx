@@ -10,11 +10,12 @@ import Counter from './printpagecount';
 function StudentPrintDocuments() {
   const { connectedPrinters } = useConnectedPrinters(); // Access connected printers
   const { uploadedFiles } = useUploadedFiles(); // Access uploaded files
-  const { paperBalance } = usePaperContext(); // Access current paper balance
+  const { paperBalance, updatePaperBalance } = usePaperContext(); // Access and update paper balance
   const [selectedPrinter, setSelectedPrinter] = useState(null); // Track selected printer
   const [selectedFile, setSelectedFile] = useState(null); // Track selected file
   const [selectedPaperType, setSelectedPaperType] = useState(''); // Paper size state
   const [selectedDuplexing, setSelectedDuplexing] = useState(''); // Duplexing state
+  const [copies, setCopies] = useState(1); // Track number of copies
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission state
   const [submitStatus, setSubmitStatus] = useState(''); // Track final status
 
@@ -39,18 +40,32 @@ function StudentPrintDocuments() {
     }
   };
 
+  const handleCopiesChange = (event) => {
+    const value = Math.max(1, parseInt(event.target.value, 10) || 1);
+    setCopies(value);
+  };
+
   const handleSubmit = () => {
     if (!selectedPrinter || !selectedFile || !selectedPaperType || !selectedDuplexing) {
       setSubmitStatus('Hãy điền đầy đủ thông tin vào các ô!');
       return;
     }
 
+    const pagesPerCopy = selectedFile.pageCount * (selectedPaperType === 'A3' ? 2 : 1);
+    const totalPagesNeeded = pagesPerCopy * copies;
+
+    if (totalPagesNeeded > paperBalance) {
+      setSubmitStatus(`In thất bại! Bạn cần thêm ${totalPagesNeeded - paperBalance} trang giấy để in.`);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('');
 
-    // Simulate loading
+    // Simulate printing process
     setTimeout(() => {
       setIsSubmitting(false);
+      updatePaperBalance(paperBalance - totalPagesNeeded);
       setSubmitStatus('In tài liệu thành công!');
     }, 2000); // Simulates a 2-second submission process
   };
@@ -69,19 +84,19 @@ function StudentPrintDocuments() {
             <h1 className="text-center mb-4">
               <i className="bi bi-file-earmark-text me-2"></i>In tài liệu
             </h1>
-              {/* Paper Balance Section */}
-              <div className="header-section mb-4">
-                <h5 className="text-center mb-3">
-                  Số trang giấy còn lại:{" "}
-                  <strong
-                    style={{
-                      color: paperBalance > 0 ? "green" : "red",
-                    }}
-                  >
-                    {paperBalance} trang
-                  </strong>
-                </h5>
-              </div>
+            {/* Paper Balance Section */}
+            <div className="header-section mb-4">
+              <h5 className="text-center mb-3">
+                Số trang giấy còn lại:{' '}
+                <strong
+                  style={{
+                    color: paperBalance > 0 ? 'green' : 'red',
+                  }}
+                >
+                  {paperBalance} trang
+                </strong>
+              </h5>
+            </div>
             <div className="file-selection-container mb-4">
               <h5 className="mb-3">Select Document:</h5>
               <select
@@ -97,9 +112,16 @@ function StudentPrintDocuments() {
                 ))}
               </select>
             </div>
-            <div className="counter-section">
-              <p className="counter-title">Số lượng bản sao:</p>
-              <Counter />
+            <div className="counter-section mb-4">
+              <label htmlFor="copiesInput" className="form-label">Số lượng bản sao:</label>
+              <input
+                type="number"
+                id="copiesInput"
+                className="form-control"
+                value={copies}
+                min="1"
+                onChange={handleCopiesChange}
+              />
             </div>
             <div className="radio-section-container">
               <div className="radio-section">
@@ -201,7 +223,11 @@ function StudentPrintDocuments() {
                 {isSubmitting ? 'Đang gửi...' : 'In tài liệu'}
               </button>
               {submitStatus && (
-                <div className={`alert mt-3 ${isSubmitting ? 'alert-warning' : 'alert-success'}`}>
+                <div
+                  className={`alert mt-3 ${
+                    submitStatus.includes('thành công') ? 'alert-success' : 'alert-danger'
+                  }`}
+                >
                   {submitStatus}
                 </div>
               )}

@@ -1,0 +1,214 @@
+[33mcommit c9915a5ff20258283a24ad2ede31ae6d670a4414[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/Student-uploadDocument[m[33m)[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Mon Dec 9 01:54:21 2024 +0700
+
+    feat: Synced the paper count between BuyPaper and StudentInfo
+
+[33mcommit 7e3b8877424b1eea0472e91e7d599a92e8130d02[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Mon Dec 9 01:45:47 2024 +0700
+
+    feat: PrintDocument language to Vietnamese
+
+[33mcommit f4563771223e5ce8877839a5e947a79578e5a9e8[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Thu Dec 5 01:16:48 2024 +0700
+
+    feat: installed new library to count pages in a document
+
+[33mcommit 8a485b29b5dba86985d5d3718f2bab4397c10fa3[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Thu Dec 5 00:44:53 2024 +0700
+
+    feat: Sync enabled printers from SPSO config with Student view printer feature.
+
+[33mcommit 94ebd4ee28809cb4a1023739e28ad7f018899564[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Wed Dec 4 00:31:20 2024 +0700
+
+    feat: Chaged dropdown menu in upload document to radio button
+
+[33mcommit 8d8568cbd23b50fba51f178fc4170e719ff4da6e[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Tue Dec 3 22:03:48 2024 +0700
+
+    feat: Sync file filter between SPSO system config and Student upload document
+
+[33mcommit ddffe5fa30be1b5b27d5d3e146bccc52bb75892f[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Tue Dec 3 21:29:28 2024 +0700
+
+    feat: Added global context for file types
+
+[33mcommit 3bb4a2e18d66a81634c39f20c471bd32682e2588[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Tue Dec 3 20:52:55 2024 +0700
+
+    feat: Display allowed file types on SPSO config
+
+[33mcommit 8456168f3cf41dfe559fa969de53678d7a543178[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 279a08a ff8ebeb
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Mon Dec 2 09:35:48 2024 +0700
+
+    Merge pull request #12 from RestingWiki/feature/upload-documents
+    
+    code: add uploading documents
+
+[33mcommit 279a08a70e8fec2e0141e2bcd9a263f6dc04b1c0[m
+Merge: af28801 1886687
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Mon Dec 2 09:31:04 2024 +0700
+
+    Merge pull request #10 from nguyen875/feature/view-printer--print-documents
+    
+    feat/implement view printer, print
+
+[33mcommit af28801766220ceb8e93944ae8bd6ca41bb0d93f[m
+Merge: 70950a9 0986f17
+Author: Hayzen2 <145183894+Hayzen2@users.noreply.github.com>
+Date:   Sun Dec 1 11:17:21 2024 +0700
+
+    Merge pull request #11 from RestingWiki/feature/add-student-information
+    
+    feat: add Student Information
+
+[33mcommit 0986f171b717cf733330eda5c2d7ce22d9512d7f[m[33m ([m[1;31morigin/feature/add-student-information[m[33m)[m
+Author: Hayzen2 <baongocngo2004@gmail.com>
+Date:   Sun Dec 1 11:15:41 2024 +0700
+
+    feat: add Student Information
+
+[33mcommit ff8ebeb11654b3adc54d287b38d2aeac250a8ca7[m[33m ([m[1;31morigin/feature/upload-documents[m[33m)[m
+Author: kiet-na <166475992+kiet-na@users.noreply.github.com>
+Date:   Sun Dec 1 11:08:27 2024 +0700
+
+    code: add uploading documents
+
+[33mcommit 1886687bdaf6526c36c56f0f0e8d2f744fb422c9[m
+Author: nguyen875 <nguyen.nguyen2k4nker@hcmut.edu.vn>
+Date:   Sun Dec 1 03:38:49 2024 +0000
+
+    feat/implement view printer, print
+
+[33mcommit 70950a9137c0ce9aaee8015f94a2a247c1a57951[m
+Merge: ce8af13 27b06d0
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Fri Nov 29 00:29:45 2024 +0700
+
+    Merge pull request #9 from RestingWiki/feature/SPSO-dashboard
+    
+    Feature/SPSO-dashboard
+
+[33mcommit 27b06d075911acb7b382b85d845e7360c3d8f7f8[m[33m ([m[1;31morigin/feature/SPSO-dashboard[m[33m, [m[1;32mfeature/SPSO-dashboard[m[33m)[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Fri Nov 29 00:28:37 2024 +0700
+
+    feat: Implemented SPSO dashboard
+    Redefined data arrays
+
+[33mcommit 3e8f6e01a039393f77472634d3ef02d68f5248dd[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Fri Nov 29 00:27:43 2024 +0700
+
+    fix: resolve style overwriting in buy paper
+
+[33mcommit ce8af13a5a2212450dcacf2e35a3528996c5ad31[m
+Merge: 1d77cb0 34cc923
+Author: DaauShen <93089549+DaauShen@users.noreply.github.com>
+Date:   Tue Nov 26 22:59:44 2024 +0700
+
+    Merge pull request #8 from RestingWiki/feature/buy-printing-pages
+    
+    add buy paper
+
+[33mcommit 34cc923a6ea0cf21d5ae9f50e83f9f992c61eaf1[m[33m ([m[1;31morigin/feature/buy-printing-pages[m[33m)[m
+Author: Nguyễn Háo Hồng Dũ <du.nguyenhaohong@hcmut.edu.vn>
+Date:   Tue Nov 26 22:42:39 2024 +0700
+
+    add buy paper
+
+[33mcommit 1d77cb0416b8682fa639fc2f31e0a6e50e2317cf[m[33m ([m[1;32mfeature/main-webpage[m[33m, [m[1;32mdocs/update-README[m[33m)[m
+Merge: 5d4435e 73727de
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Mon Nov 25 22:32:38 2024 +0700
+
+    Merge pull request #7 from RestingWiki/feature/main-webpage
+    
+    feat: Created framework for implementing the Student UI
+
+[33mcommit 73727de4b5d79512911cbcdb4e9c8ebf280548ad[m[33m ([m[1;31morigin/feature/main-webpage[m[33m)[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Mon Nov 25 22:31:26 2024 +0700
+
+    feat: Created framework for implementing the Student UI
+
+[33mcommit 5d4435eeca52af3f21e60dfcd3cbce872d193c17[m
+Merge: 2d6e6e3 db0a650
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Sat Nov 23 20:57:04 2024 +0700
+
+    Merge pull request #6 from RestingWiki/docs/update-README
+    
+    Docs/update readme
+
+[33mcommit db0a650ef2ea6b5b8d177826a24b503b8e59e493[m[33m ([m[1;31morigin/docs/update-README[m[33m)[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Sat Nov 23 20:56:03 2024 +0700
+
+    docs: update README with web development contribution guidelines.
+
+[33mcommit 5049b1139d4a0f734fdc7ca6e8ebd43a10c2bf49[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Sat Nov 23 20:55:37 2024 +0700
+
+    docs: update README with web development contribution guidelines.
+
+[33mcommit 2d6e6e385f22a340f727af028c215635178add9d[m
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Sat Nov 23 20:45:26 2024 +0700
+
+    docs: deleted code/README.md
+
+[33mcommit a68e8cb73fc9cf5d5f07a4321dc50c6860d3282c[m
+Merge: 6fd962f d456308
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Sat Nov 23 20:37:22 2024 +0700
+
+    Merge pull request #5 from RestingWiki/feature/main-webpage
+    
+    merge: update feature/main-webpage with changes from main
+
+[33mcommit d456308f372b0a33a3f866e7c1594a3e9eee76a1[m
+Author: RestingWiki <126898951+RestingWiki@users.noreply.github.com>
+Date:   Sat Nov 23 20:36:23 2024 +0700
+
+    merge: update feature/main-webpage with changes from main
+
+[33mcommit 6fd962f5bb8fd1bb9dda58052ff1d8327a199fb2[m
+Author: kiet-na <166475992+kiet-na@users.noreply.github.com>
+Date:   Sat Nov 23 16:35:10 2024 +0700
+
+    docs: update sequence diagram and component diagram
+
+[33mcommit 57b70939c582d22094bcbc47692c480c4a367526[m
+Merge: e71597e 336f402
+Author: Hayzen2 <145183894+Hayzen2@users.noreply.github.com>
+Date:   Sat Nov 23 14:52:28 2024 +0700
+
+    Merge pull request #4 from RestingWiki/docs/update-architecture
+    
+    docs: update architechture description (Data storage approach, External services and API)
+
+[33mcommit 336f40283dc474a59b0d0d053e0b42c5ca51482c[m[33m ([m[1;31morigin/docs/update-architecture[m[33m)[m
+Author: Hayzen <baongocngo2211@gmail.com>
+Date:   Sat Nov 23 00:48:57 2024 +0700
+
+    docs: update architechture description
+
+[33mcommit e71597e076ce21647105ba1e2db34a9d4a67f869[m
+Merge: fae1a39 00701a8
+Author: Nguyễn Anh Khoa <126898951+RestingWiki@users.noreply.github.com>
+Date:   Tue Nov 19 21:09:21 2024 +0700
+
+    Merge pull req

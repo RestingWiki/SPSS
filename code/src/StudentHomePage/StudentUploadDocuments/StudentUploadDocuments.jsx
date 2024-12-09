@@ -1,15 +1,20 @@
-// src/StudentHomePage/StudentUploadDocuments/StudentUploadDocuments.jsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import Metadata from '../../Metadata/Metada'; // Corrected import path
 import StudentNavBar from '../StudentNavBar/StudentNavBar';
 import { formatFileSize } from '../../formatFileSize'; // Import the utility function
+import { useFileTypes } from '../../context/FileTypesContext'; // Import context for file types
+import { useUploadedFiles } from '../../context/UploadedFileContext'; // Import context for uploaded files
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is installed
 
 function StudentUploadDocuments() {
+  // Access file types from the context
+  const { fileTypes } = useFileTypes();
+
+  // Access uploaded files context
+  const { uploadedFiles, addUploadedFile, removeUploadedFile, clearUploadedFiles } = useUploadedFiles();
+
   // State variables for form inputs
-  const [files, setFiles] = useState([]);
   const [copies, setCopies] = useState(1);
   const [color, setColor] = useState(true);
   const [doubleSided, setDoubleSided] = useState(false);
@@ -17,37 +22,47 @@ function StudentUploadDocuments() {
   const [message, setMessage] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
 
-  const maxSize = 10 * 1024 * 1024; // 10MB per file
   const maxFiles = 10; // Maximum 10 files
+  const maxTotalSize = 100 * 1024 * 1024; // 100MB total size
 
   // Handle file selection with validation
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
-    const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'text/plain',
-    ];
 
-    // Calculate the total number of files after adding new ones
-    const totalFiles = files.length + selectedFiles.length;
-    if (totalFiles > maxFiles) {
-      setMessage(`You can upload a maximum of ${maxFiles} files. You have already selected ${files.length} file(s).`);
-      return;
-    }
+    // Debugging: Log file name and type
+    selectedFiles.forEach((file) => {
+      console.log(`File Name: ${file.name}, File Type: ${file.type}`);
+    });
 
     const validatedFiles = [];
     let errorMessages = [];
 
+    // Calculate total number of files
+    const totalFiles = uploadedFiles.length + selectedFiles.length;
+    if (totalFiles > maxFiles) {
+      setMessage(`You can upload a maximum of ${maxFiles} files. You have already selected ${uploadedFiles.length} file(s).`);
+      return;
+    }
+
+    // Calculate current total size
+    const currentTotalSize = uploadedFiles.reduce((acc, file) => acc + file.size, 0);
+    const newFilesTotalSize = selectedFiles.reduce((acc, file) => acc + file.size, 0);
+    const updatedTotalSize = currentTotalSize + newFilesTotalSize;
+
+    if (updatedTotalSize > maxTotalSize) {
+      setMessage(`Total file size exceeds the 100MB limit. Currently selected: ${formatFileSize(currentTotalSize)}.`);
+      return;
+    }
+
     selectedFiles.forEach((file) => {
-      if (!allowedTypes.includes(file.type)) {
-        errorMessages.push(`Unsupported file type: ${file.name}`);
-      } else if (file.size > maxSize) {
-        errorMessages.push(`File too large (max 10MB): ${file.name} (${formatFileSize(file.size)})`);
+      // Get file extension from file name
+      const fileExtension = file.name.slice(file.name.lastIndexOf('.') + 1).toLowerCase();
+
+      if (!fileTypes.includes(fileExtension)) {
+        errorMessages.push(`Unsupported file extension: ${file.name}`);
       } else {
-        // Prevent duplicate files (optional)
-        const isDuplicate = files.some((existingFile) => existingFile.name === file.name && existingFile.size === file.size);
+        // Prevent duplicate files
+        const isDuplicate = uploadedFiles.some((existingFile) => existingFile.name === file.name && existingFile.size === file.size);
         if (!isDuplicate) {
           validatedFiles.push(file);
         } else {
@@ -60,20 +75,10 @@ function StudentUploadDocuments() {
       setMessage(errorMessages.join(' | '));
     } else if (validatedFiles.length > 0) {
       setMessage('Files added successfully and ready to upload.');
+      validatedFiles.forEach((file) => addUploadedFile(file)); // Add validated files to context
     } else {
       setMessage('No new valid files selected.');
     }
-
-    // Append validated files to existing files
-    setFiles((prevFiles) => [...prevFiles, ...validatedFiles]);
-  };
-
-  // Remove file from the list
-  const removeFile = (index) => {
-    const newFiles = [...files];
-    newFiles.splice(index, 1);
-    setFiles(newFiles);
-    setMessage('File removed.');
   };
 
   // Handle form submission
@@ -83,7 +88,7 @@ function StudentUploadDocuments() {
     // Clear previous messages
     setMessage('');
 
-    if (files.length === 0) {
+    if (uploadedFiles.length === 0) {
       setMessage('Please select at least one file to upload.');
       return;
     }
@@ -95,7 +100,7 @@ function StudentUploadDocuments() {
     formData.append('doubleSided', doubleSided);
 
     // Append files with 'files[]' to indicate an array
-    files.forEach((file) => {
+    uploadedFiles.forEach((file) => {
       formData.append('files[]', file);
     });
 
@@ -117,7 +122,7 @@ function StudentUploadDocuments() {
       if (response.status === 200) {
         setMessage('Print request submitted successfully!');
         // Reset form fields
-        setFiles([]);
+        clearUploadedFiles();
         setCopies(1);
         setColor(true);
         setDoubleSided(false);
@@ -138,7 +143,7 @@ function StudentUploadDocuments() {
       <Metadata />
       <StudentNavBar />
       <div className="container mt-5">
-        <h2>Upload Documents for Printing</h2>
+        <h2>Xin hãy nhập tài liệu để in</h2>
         {message && (
           <div
             className={`alert ${
@@ -174,33 +179,33 @@ function StudentUploadDocuments() {
               type="file"
               id="files"
               multiple
-              accept=".pdf,.doc,.docx,.txt"
+              accept={fileTypes.map((type) => `.${type}`).join(',')} // Dynamically set accept attribute
               onChange={handleFileChange}
               required
-              disabled={isSubmitting || files.length >= maxFiles}
+              disabled={isSubmitting || uploadedFiles.length >= maxFiles}
             />
             <div className="form-text">
-              Allowed formats: .pdf, .doc, .docx, .txt | Max size per file: 10MB | Max files: {maxFiles}
+              File hợp lệ: {fileTypes.join(', ')} | Tổng kích thước tối đa: 100MB | Số lượng tối đa: {maxFiles}
             </div>
           </div>
 
           {/* Preview Selected Files */}
-          {files.length > 0 && (
+          {uploadedFiles.length > 0 && (
             <div className="mb-3">
               <label className="form-label">Selected Files:</label>
               <ul className="list-group">
-                {files.map((file, index) => (
+                {uploadedFiles.map((file, index) => (
                   <li
                     key={index}
                     className="list-group-item d-flex justify-content-between align-items-center"
                   >
                     <div>
-                      <strong>{file.name}</strong> - {formatFileSize(file.size)}
+                      <strong>{file.name}</strong> - {formatFileSize(file.size)} - {file.pageCount} pages
                     </div>
                     <button
                       type="button"
                       className="btn btn-sm btn-danger"
-                      onClick={() => removeFile(index)}
+                      onClick={() => removeUploadedFile(index)}
                       disabled={isSubmitting}
                     >
                       Remove
@@ -210,68 +215,10 @@ function StudentUploadDocuments() {
               </ul>
               {/* Display Total Upload Size */}
               <div className="mt-2">
-                <strong>Total Size:</strong> {formatFileSize(files.reduce((acc, file) => acc + file.size, 0))}
+                <strong>Total Size:</strong> {formatFileSize(uploadedFiles.reduce((acc, file) => acc + file.size, 0))}
               </div>
             </div>
           )}
-
-          {/* Number of Copies */}
-          <div className="mb-3">
-            <label htmlFor="copies" className="form-label">
-              Number of Copies
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="copies"
-              value={copies}
-              min="1"
-              max="100"
-              onChange={(e) => setCopies(e.target.value)}
-              required
-              disabled={isSubmitting}
-            />
-          </div>
-
-          {/* Print Options */}
-          <div className="mb-3">
-            <label className="form-label">Print Options</label>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="color"
-                checked={color}
-                onChange={(e) => setColor(e.target.checked)}
-                disabled={isSubmitting}
-              />
-              <label className="form-check-label" htmlFor="color">
-                Color
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="doubleSided"
-                checked={doubleSided}
-                onChange={(e) => setDoubleSided(e.target.checked)}
-                disabled={isSubmitting}
-              />
-              <label className="form-check-label" htmlFor="doubleSided">
-                Double-Sided
-              </label>
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={isSubmitting || files.length === 0}
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit Print Request'}
-          </button>
         </form>
       </div>
     </>

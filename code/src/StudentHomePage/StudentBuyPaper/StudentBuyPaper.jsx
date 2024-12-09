@@ -13,11 +13,16 @@ function StudentBuyPaper() {
 
   const { paperBalance, addPaper } = usePaperContext(); // Use the context
 
-  const pricePerPage = 2000;
+  const pricePerPage = 240;
   const totalPrice = pageCount * pricePerPage;
 
   const handlePageCountChange = (e) => {
-    setPageCount(parseInt(e.target.value, 10));
+    let value = parseInt(e.target.value, 10);
+    if (value > 500) {
+      alert("Bạn chỉ có thể mua tối đa 500 trang mỗi lần!");
+      value = 500; // Cap the value at 500
+    }
+    setPageCount(value > 0 ? value : 1); // Ensure it's at least 1
   };
 
   const handleBuy = () => {

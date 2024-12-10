@@ -60,7 +60,8 @@
   - If the SPSO confirms the change the SSPS will then reply by notifying the change is updated.
 
 ## Class diagram
-### **Design pattern used: ** Facade
+### Design pattern used: Facade
+![Class Diagram](./images/CLASS-PrintingManagementModule.png)
 1. **SPSOView (Base Class)**
     
     - **Attributes**:

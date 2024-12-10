@@ -215,7 +215,7 @@ const SPSODashboard = () => {
             <table className="table table-bordered text-center table-striped">
             <thead className="table-dark">
                 <tr>
-                <th>MSNV</th>
+                <th>MSSV</th>
                 <th>Tên</th>
                 <th>Thời gian</th>
                 <th>Kích thước tệp</th>

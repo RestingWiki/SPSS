@@ -9,7 +9,6 @@
 - [Student Smart Printing Service](#student-smart-printing-service)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
-  - [Getting Started](#getting-started)
   - [Documentation](#documentation)
   - [Contribution](#contribution)
       - [Step 1: Environment](#step-1-environment)
@@ -41,13 +40,6 @@ HCMUT_SSPS (Student Smart Printing Service) is a convenient, smart printing solu
 - **Access Control**: All users are authenticated through the HCMUT_SSO service.
 
 The system is accessible via both a web-based app and a mobile app, ensuring ease of use for students and administrators alike.
-
-**********************
-
-## Getting Started
-``` 
-TBD
-```
 
 **********************
 

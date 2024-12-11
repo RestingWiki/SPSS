@@ -66,7 +66,7 @@ function StudentPrintDocuments() {
     setTimeout(() => {
       setIsSubmitting(false);
       usePaper(totalPagesNeeded); // Deduct the pages used for printing
-      setSubmitStatus('In tài liệu thành công!');
+      setSubmitStatus(`In tài liệu thành công! Bạn đã in ${copies} bản sao.`);
     }, 2000); // Simulates a 2-second submission process
   };
 

@@ -9,12 +9,20 @@ export const PaperProvider = ({ children }) => {
 
   // Add paper to the balance
   const addPaper = (amount) => {
-    setPaperBalance((prev) => prev + amount);
+    if (amount > 0) {
+      setPaperBalance((prev) => prev + amount);
+    } else {
+      console.error("Amount to add must be greater than 0.");
+    }
   };
 
   // Use paper from the balance
   const usePaper = (amount) => {
-    setPaperBalance((prev) => Math.max(0, prev - amount));
+    if (amount > 0) {
+      setPaperBalance((prev) => prev - amount);
+    } else {
+      console.error("Amount to deduct must be greater than 0.");
+    }
   };
 
   return (
@@ -25,4 +33,10 @@ export const PaperProvider = ({ children }) => {
 };
 
 // Custom hook to use the context
-export const usePaperContext = () => useContext(PaperContext);
+export const usePaperContext = () => {
+  const context = useContext(PaperContext);
+  if (!context) {
+    throw new Error("usePaperContext must be used within a PaperProvider");
+  }
+  return context;
+};

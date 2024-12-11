@@ -5,7 +5,7 @@ import Metadata from "../../Metadata/Metada";
 import StudentNavBar from "../StudentNavBar/StudentNavBar";
 import { usePaperContext } from "../../context/PaperContext"; // Import the context
 import "./StudentBuyPaper.css";
-
+import Footer from "../../Footer/Footer";
 function StudentBuyPaper() {
   const [pageCount, setPageCount] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -126,6 +126,8 @@ function StudentBuyPaper() {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Footer/>
     </>
   );
 }

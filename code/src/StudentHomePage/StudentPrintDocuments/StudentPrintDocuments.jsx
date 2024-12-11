@@ -5,12 +5,12 @@ import { usePaperContext } from '../../context/PaperContext'; // Import the Pape
 import Metadata from '../../Metadata/Metada';
 import StudentNavBar from '../StudentNavBar/StudentNavBar';
 import './StudentPrintDocument.css';
-import Counter from './printpagecount';
+import Footer from '../../Footer/Footer';
 
 function StudentPrintDocuments() {
   const { connectedPrinters } = useConnectedPrinters(); // Access connected printers
   const { uploadedFiles } = useUploadedFiles(); // Access uploaded files
-  const { paperBalance, updatePaperBalance } = usePaperContext(); // Access and update paper balance
+  const { paperBalance, usePaper } = usePaperContext(); // Access and deduct paper balance
   const [selectedPrinter, setSelectedPrinter] = useState(null); // Track selected printer
   const [selectedFile, setSelectedFile] = useState(null); // Track selected file
   const [selectedPaperType, setSelectedPaperType] = useState(''); // Paper size state
@@ -65,7 +65,7 @@ function StudentPrintDocuments() {
     // Simulate printing process
     setTimeout(() => {
       setIsSubmitting(false);
-      updatePaperBalance(paperBalance - totalPagesNeeded);
+      usePaper(totalPagesNeeded); // Deduct the pages used for printing
       setSubmitStatus('In tài liệu thành công!');
     }, 2000); // Simulates a 2-second submission process
   };
@@ -235,6 +235,8 @@ function StudentPrintDocuments() {
           </form>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

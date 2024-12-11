@@ -4,7 +4,7 @@ import SPSONavBar from "../SPSONavBar/SPSONavbar";
 import PrintLogs from "./PrintLogs";
 import "./SPSOLogs.css";
 import logsData from "./logsData"; // Import the logsData
-
+import Footer from "../../Footer/Footer";
 function SPSOLogs() {
   const [activeTab, setActiveTab] = useState("student");
   const [studentFilter, setStudentFilter] = useState("");
@@ -204,6 +204,8 @@ function SPSOLogs() {
           )}
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }

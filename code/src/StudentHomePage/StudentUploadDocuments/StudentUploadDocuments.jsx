@@ -6,7 +6,7 @@ import { formatFileSize } from '../../formatFileSize'; // Import the utility fun
 import { useFileTypes } from '../../context/FileTypesContext'; // Import context for file types
 import { useUploadedFiles } from '../../context/UploadedFileContext'; // Import context for uploaded files
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is installed
-
+import Footer from '../../Footer/Footer';
 function StudentUploadDocuments() {
   // Access file types from the context
   const { fileTypes } = useFileTypes();
@@ -221,6 +221,7 @@ function StudentUploadDocuments() {
           )}
         </form>
       </div>
+      <Footer/>
     </>
   );
 }

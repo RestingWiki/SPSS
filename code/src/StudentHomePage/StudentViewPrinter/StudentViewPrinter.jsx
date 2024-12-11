@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Metadata from '../../Metadata/Metada';
 import StudentNavBar from '../StudentNavBar/StudentNavBar';
 import { useConnectedPrinters } from "../../context/PrinterContext"; // Import context
-
+import Footer from '../../Footer/Footer';
 function StudentViewPrinter() {
   const { connectedPrinters } = useConnectedPrinters(); // Access connected printers from context
 
@@ -56,6 +56,7 @@ function StudentViewPrinter() {
           </tbody>
         </table>
       </div>
+      <Footer/>
     </>
   );
 }

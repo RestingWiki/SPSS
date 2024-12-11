@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './StudentHero.css'
-
 function StudentHero(){
     return(
         <>
@@ -12,6 +11,7 @@ function StudentHero(){
                     <h1>Hệ Thống In Bách Khoa</h1>
                 </div>
             </section>
+            
         </>
     )
 }

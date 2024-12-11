@@ -12,6 +12,7 @@
     - [View Student Logs](#view-student-logs-1)
     - [Change System Configurations](#change-system-configurations-1)
   - [Class diagram](#class-diagram)
+    - [Design pattern used: Facade](#design-pattern-used-facade)
   - [User Interface](#user-interface)
 
 
@@ -32,32 +33,86 @@
 
 ### Manage Printers 
 ![Manage Printers](./images/MODEL_ManagePrinters.png)
-- The sequence diagram illustrates the process of managing printers within a system that involves SPSO and the Student Smart Printing Service (SSPS). This process including the following steps:
-  - The SPSO first send a message to the SSPS to manage the printers
-  - Then the SPSO will have 2 options to manage the printer: adding new printers or changing the printer status.
-    - If the SPSO chooses to add a new printer, the SSPS will respond by displaying the unused printers. The SPSO can select the unused printer and change printer state to online.
-    - If the SPSO chooses to change the printer state, the SSPS will display the online printers to the SPSO. To continue the process, the SPSO will then select the online printer, at this stage, the SPSO can have 2 options: set printer state to enable or disable.
-  - The SSPS will then reply to the message by asking the SPSO to confirm the change. If the SPSO sends a message to confirm the change, the change will be updated and the SSPS will reply to SPSO by notifying the change is updated.
+1. **Displaying initial printer status:**
+    - The SPSO chooses the **View printer** tab.
+    - The SPSOPrinterView signals the PrinterController to retrieve information about available and logically connected printers by asynchronously calling `getAvailablePrinter()` and `getConnectedPrinter()`.
+    - The PrinterController continues by requesting printer data from the PrinterModel by calling `getInfo()`.
+    - The PrinterModel then gets the printers data from the PrinterDatabase using the `getPrinterList()` method.
+    - The PrinterDatabase returns the list of printers. The PrinterModel sends the data back to the PrinterController, which continues to relay it to the SPSOPrinterView for display to the SPSO.
+
+2. **Managing printers:**
+    - The SPSO has two choices for interacting with the printers:
+        a. Add/Connect a printer, meaning students will be able to see this new printer in their views.
+        b. Change the state of an existing printer from offline to online or the opposite.
+
+3. **Alternative flow: Adding a New Printer**
+    - If the SPSO chooses to add a new printer, they will select the unused printer from the previously updated view.
+    - The SPSOPrinterView calls the `connectPrinterToSPSO()` method on the PrinterController.
+    - The PrinterController signals the PrinterModel to connect to **SPSS**.
+    - The PrinterModel finally updates the printer status in the PrinterDatabase using the `updatePrinterInfo()` method.
+
+4. **Alternative flow: Changing a Printer State**
+    - If the SPSO decides to change the state of a printer instead, they will use the SPSOPrinterView, which displays a list of printers online/offline connected to SPSS.
+    - The SPSO selects one of these printers and can take one of the following actions:
+        a. Turn the printer **on** by calling the `turnOnPrinter()` method.
+        b. Turn the printer **off** by calling the `turnOffPrinter()` method.
+    - The PrinterController calls the corresponding method (`turnOn()` or `turnOff()`) on the PrinterModel, which updates the printer status in the PrinterDatabase using the `updatePrinterInfo()` method.
+
 
 ### View Student Logs
 ![View Student Logs](./images/MODEL_ViewStudentLogs.png)
-- The sequence diagram illustrates the process of viewing logs within a system that involves SPSO and the Student Smart Printing Service (SSPS), the process including the following steps:
-  - The SPSO first sends a message to the SSPS to view the logs.
-  -	The SPSO will have 2 options to view the logs: viewing the logs grouped by students or grouped by printers.
-    - If the SPSO chooses to view the logs grouped by students, the SSPS will respond by displaying the students log.
-    -	If the SPSO chooses to view the logs grouped by printers, the SSPS will respond by displaying the printers log.
-  - The SPSO can then filter the log in the way they want to review. The SSPS will reply by sending the filtered log to the SPSO.
+1. **Displaying initial log tables:**
+    - The SPSO chooses the **SPSOLogsView** tab and selects one of two options:
+        a. View **student logs**.
+        b. View **printer logs**.
+
+2. **Alternative flow: Viewing Student Logs**
+    - The SPSO selects the *View Student Logs* option.
+    - The SPSOLogsView calls the `getLogSortedByStudent()` method on the LogController.
+    - The LogController requests the log data by calling the `getInfo()` method on the LogModel.
+    - The LogModel retrieves the log data from the LogDatabase using the `getLogTable()` method.
+    - The LogDatabase returns the log data to the LogModel, which moves it back to the LogController.
+    - The LogController sends the log data to the SPSOLogsView, which displays the student logs to the SPSO.
+    - The SPSO can apply filters to the retrieved log data.
+    - Once filtered, the SPSOLogsView calls `updateStudentView()` to refresh the displayed logs, showing the updated log view.
+
+3. **Alternative flow: Viewing Printer Logs**
+    - The SPSO selects the *View Printer Logs* option.
+    - The SPSOLogsView calls the `getLogSortedByPrinter()` method on the LogController.
+    - Similarly, the LogController retrieves the printer logs by calling the `getInfo()` method on the LogModel.
+    - The LogModel gets the data from the LogDatabase using the `getLogTable()` method.
+    - The LogDatabase returns the data to the LogModel, which forwards it to the LogController.
+    - The LogController provides the log data to the SPSOLogsView, which then displays the printer logs to the SPSO.
+    - The SPSO can apply filters to the log data.
+    - Once filtered, the SPSOLogsView calls `updateStudentView()` to refresh the displayed printer logs with the updated view.
+
 
 ### Change System Configurations
 ![Change System Configurations](./images/MODEL_ChangeSystemConfigurations.png)
-- The sequence diagram illustrates the process of changing system configurations within a system that involves SPSO and the Student Smart Printing Service (SSPS). This process including the following steps:
-  - The SPSO first sends a message to the SSPS to change the system configurations.
-  -	Then the SPSO will have 3 options to manage the printer: changing the default pages provided to the students, defining the valid file types to print and changing the page allocation default date.
-    -	If the SPSO chooses to change the default pages provided, the SPSO will enter the new default number of pages.
-    - If the SPSO chooses to define valid file types, the SPSO will enter the valid file extension.
-    - If the SPSO chooses to change page allocation default date, the SPSO will enter new dates.
-  - The SSPS will then ask the SPSO to confirm the change.
-  - If the SPSO confirms the change the SSPS will then reply by notifying the change is updated.
+1. **Displaying initial system settings:**
+    - The SPSO clicks the *Change System Settings* option.
+    - The SPSOSettingsView calls the `getSetting()` method on the SettingsController to retrieve the current settings.
+    - The SettingsModel retrieves the settings from the **SSPS** using `getSystemSettings()`.
+    - The retrieved settings are passed back to the SPSOSettingsView to be displayed to the SPSO.
+
+2. **Configuring System Settings:**
+    - The SPSO has multiple choices for modifying system settings:
+
+    a. **Adding New Valid File Types:**
+        - The SPSO selects the option to add new valid file types.
+        - The SPSOSettingsView calls the `addAllowedFileType()` method on the SettingsController.
+        - The SettingsController calls `addAllowedFileType()` on the SettingsModel, which updates the system settings in the SSPS with the `updateSystemSettings()` method.
+
+    b. **Changing Default Page Allocation:**
+        - The SPSO selects the option to change the default page allocation.
+        - The SPSOSettingsView calls the `setNumberOfPapers()` method on the SettingsController.
+        - The SettingsController calls `setNumberOfPapers()` on the SettingsModel to change the allocation setting in the SSPS via the `updateSystemSettings()` method.
+
+    c. **Changing Page Allocation Date:**
+        - The SPSO selects the option to change the page allocation date.
+        - The SPSOSettingsView calls the `setDateToGivePapers()` method on the SettingsController.
+        - The SettingsController calls `setDateToGivePapers()` on the SettingsModel, which modifies the allocation date in the SSPS using the `updateSystemSettings()` method.
+
 
 ## Class diagram
 ### Design pattern used: Facade

@@ -5,7 +5,7 @@ import Metadata from "../../Metadata/Metada";
 import StudentNavBar from "../StudentNavBar/StudentNavBar";
 import { usePaperContext } from "../../context/PaperContext"; // Import the context
 import "./StudentBuyPaper.css";
-
+import Footer from "../../Footer/Footer";
 function StudentBuyPaper() {
   const [pageCount, setPageCount] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -53,7 +53,7 @@ function StudentBuyPaper() {
         <h1 className="text-center mb-4">
           <i className="bi bi-cart-plus me-2"></i>Mua thêm giấy
         </h1>
-        <p className="text-center mb-4 fs-4 text-muted">Giá: 2.000 VND/trang.</p>
+        <p className="text-center mb-4 fs-4 text-muted">Giá: 240 VND/trang.</p>
         <div className="mx-auto p-4 shadow card-buy-paper" style={{ maxWidth: "600px" }}>
           <div className="mb-3 text-center fs-5">
             <strong>Số trang hiện tại:</strong>{" "}
@@ -126,6 +126,8 @@ function StudentBuyPaper() {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Footer/>
     </>
   );
 }

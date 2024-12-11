@@ -4,7 +4,7 @@ import SPSONavBar from "../SPSONavBar/SPSONavbar";
 import ConnectPrinter from "./ConnectPrinter";
 import TogglePrinter from "./TogglePrinter";
 import { useConnectedPrinters } from "../../context/PrinterContext";
-
+import Footer from "../../Footer/Footer";
 function SPSOPrinterManagement() {
   const { connectedPrinters, setConnectedPrinters } = useConnectedPrinters(); // Use context
   const [physicalPrinters, setPhysicalPrinters] = useState([
@@ -113,6 +113,8 @@ function SPSOPrinterManagement() {
           </table>
         </div>
       </div>
+      
+      <Footer/>
     </>
   );
 }

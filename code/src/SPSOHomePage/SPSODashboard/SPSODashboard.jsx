@@ -3,7 +3,7 @@ import Metadata from "../../Metadata/Metada";
 import SPSONavBar from "../SPSONavBar/SPSONavbar";
 import './SPSODashboard.css'
 import Chart from 'chart.js/auto';
-
+import Footer from '../../Footer/Footer';
 const SPSODashboard = () => {
   const [selectedYear, setSelectedYear] = useState('2024');
   const [tableData, setTableData] = useState([]);
@@ -215,7 +215,7 @@ const SPSODashboard = () => {
             <table className="table table-bordered text-center table-striped">
             <thead className="table-dark">
                 <tr>
-                <th>MSNV</th>
+                <th>MSSV</th>
                 <th>Tên</th>
                 <th>Thời gian</th>
                 <th>Kích thước tệp</th>
@@ -242,6 +242,8 @@ const SPSODashboard = () => {
             </table>
         </div>
         </div>
+
+        <Footer/>
     </>
   );
 };

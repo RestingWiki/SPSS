@@ -2,13 +2,14 @@ import React from "react";
 import Metadata from "../Metadata/Metada";
 import SPSONavBar from "./SPSONavBar/SPSONavbar";
 import SPSOHero from "./SPSOHero/SPSOHero";
-
+import Footer from "../Footer/Footer";
 function SPSOHomePage(){
     return(
         <>
             <Metadata/>
             <SPSONavBar/>
             <SPSOHero/>
+            <Footer/>
         </>
     );
 }

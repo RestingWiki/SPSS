@@ -3,6 +3,7 @@ import Metadata from "../../Metadata/Metada";
 import SPSONavBar from "../SPSONavBar/SPSONavbar";
 import { useFileTypes } from "../../context/FileTypesContext"; // Import the useFileTypes hook
 import './SPSOSystemConfig.css';
+import Footer from "../../Footer/Footer";
 
 function SPSOSystemConfig() {
     const [today, setToday] = useState(() => {
@@ -103,6 +104,7 @@ function SPSOSystemConfig() {
                     <strong>Dữ liệu đã được lưu thành công!</strong>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }

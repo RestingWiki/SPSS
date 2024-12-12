@@ -1,17 +1,20 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import Metadata from "../../Metadata/Metada";
 import StudentNavBar from "../StudentNavBar/StudentNavBar";
-import { usePaperContext } from "../../context/PaperContext"; // Import the context
+import { usePaperContext } from "../../context/PaperContext";
+import { useTransactionHistory } from "../../context/TransactionHistoryContext"; // Import the context
 import "./StudentBuyPaper.css";
 import Footer from "../../Footer/Footer";
+
 function StudentBuyPaper() {
   const [pageCount, setPageCount] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [receipt, setReceipt] = useState({ pages: 0, totalPrice: 0, date: "" });
 
-  const { paperBalance, addPaper } = usePaperContext(); // Use the context
+  const { paperBalance, addPaper } = usePaperContext(); // Use the paper balance context
+  const { addTransaction } = useTransactionHistory(); // Use the transaction history context
 
   const pricePerPage = 240;
   const totalPrice = pageCount * pricePerPage;
@@ -32,12 +35,17 @@ function StudentBuyPaper() {
     // Prepare receipt data
     const date = new Date();
     const today = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-    setReceipt({
+    const transaction = {
       pages: pageCount,
       totalPrice: pricePerPage * pageCount,
       date: today,
-    });
+    };
 
+    // Update transaction history
+    addTransaction(transaction.date, transaction.totalPrice, transaction.pages);
+
+    // Update receipt and show modal
+    setReceipt(transaction);
     setShowModal(true); // Show the modal
   };
 
@@ -127,7 +135,7 @@ function StudentBuyPaper() {
         </Modal.Footer>
       </Modal>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }

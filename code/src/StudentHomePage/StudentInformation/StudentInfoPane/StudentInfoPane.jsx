@@ -1,21 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { usePaperContext } from "../../../context/PaperContext";
-import './StudentInfoPane.css';
+import { useTransactionHistory } from "../../../context/TransactionHistoryContext";
+import "./StudentInfoPane.css";
+
 function StudentInfoPane() {
-  const { paperBalance } = usePaperContext(); // Use the context
+  const { paperBalance } = usePaperContext(); // Use the context for paper balance
+  const { transactionHistory } = useTransactionHistory(); // Use the context for transaction history
 
-  const transactionHistory = [
-    { date: "10-10-2024", amount: "50,000 VND", pages: 25 },
-    { date: "05-10-2024", amount: "30,000 VND", pages: 15 },
-    { date: "01-10-2024", amount: "20,000 VND", pages: 10 },
-  ]; // Example log history for purchases
-
+  // Example log history for printing
   const printHistory = [
     { date: "12-11-2024", pages: 40, location: "A5", printer: "HP LaserJet 1020" },
     { date: "10-11-2024", pages: 30, location: "B4", printer: "Canon Pixma G3010" },
     { date: "09-11-2024", pages: 20, location: "C4", printer: "Epson EcoTank L3110" },
-  ]; // Example log history for printing
+  ];
+
+  // Sort transaction history by date (most recent first)
+  const sortedTransactionHistory = [...transactionHistory].sort((a, b) => {
+    const dateA = new Date(a.date.split("-").reverse().join("-")); // Convert "dd-mm-yyyy" to "yyyy-mm-dd"
+    const dateB = new Date(b.date.split("-").reverse().join("-"));
+    return dateB - dateA; // Sort descending
+  });
 
   return (
     <div className="container mt-5">
@@ -71,10 +76,10 @@ function StudentInfoPane() {
             </tr>
           </thead>
           <tbody>
-            {transactionHistory.map((transaction, index) => (
+            {sortedTransactionHistory.map((transaction, index) => (
               <tr key={index}>
                 <td>{transaction.date}</td>
-                <td>{transaction.amount}</td>
+                <td>{Number(transaction.amount).toLocaleString()} VND</td>
                 <td>{transaction.pages} trang</td>
               </tr>
             ))}

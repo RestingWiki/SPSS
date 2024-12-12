@@ -81,7 +81,7 @@ function SPSOSystemConfig() {
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="allocationDate" className="form-label">Ngày cung cấp số trang</label>
+                            <label htmlFor="allocationDate" className="form-label">Ngày cung cấp  trang giấy</label>
                             <input 
                                 type="date" 
                                 className="form-control" 

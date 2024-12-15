@@ -81,6 +81,7 @@ Detailed documentations about the project:
    - Install the required dependencies:
      ```bash
      npm install
+     npm install @vitejs/plugin-react --save-dev
      ```
 
    #### Step 3: Run the Development Server

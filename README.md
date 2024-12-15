@@ -67,7 +67,7 @@ Detailed documentations about the project:
    - `feat: add buy paper`
    - `fix: resolve login crash issue`
    - `docs: update modelling description`
-3. **Web Development**:
+3. **Web Development and Test Run**:
    #### Step 1: Environment
    - Ensure you have  installed
      - [Node.js](https://nodejs.org/)
@@ -88,7 +88,7 @@ Detailed documentations about the project:
      ```bash
      npm run dev
      ```
-
+  
 **********************
 
 ## Contributors

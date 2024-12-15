@@ -221,7 +221,6 @@ function StudentUploadDocuments() {
           )}
         </form>
       </div>
-      <Footer/>
     </>
   );
 }

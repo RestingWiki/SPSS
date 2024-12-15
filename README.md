@@ -78,10 +78,9 @@ Detailed documentations about the project:
      ```bash
      cd code
      ```
-   - Install the required dependencies:
+   - Install the required dependencies, remember to run this command within the code folder:
      ```bash
      npm install
-     npm install @vitejs/plugin-react --save-dev
      ```
 
    #### Step 3: Run the Development Server
